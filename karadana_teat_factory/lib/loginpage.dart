@@ -42,26 +42,67 @@ class MyHomePage extends StatelessWidget {
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: 40, // Add some horizontal padding
-              ),
+                  horizontal: 40), // Add some horizontal padding
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 150,
-                  ),
+                  // LogIn Text
                   const Text(
-                    'Welcome to The Karadana Tea Factory\nManagement System',
+                    'LogIn',
                     textAlign: TextAlign
                         .center, // Center align the text for better fit
                     style: TextStyle(
-                      fontSize: 20, // Increased font size for better visibility
+                      fontSize: 30, // Increased font size for better visibility
                       fontWeight: FontWeight.bold,
                       color: Colors.black, // Adjusted color for readability
                     ),
                   ),
+                  const Text(
+                    'Please LogIn to continue.',
+                    textAlign: TextAlign
+                        .center, // Center align the text for better fit
+                    style: TextStyle(
+                      fontSize: 15, // Increased font size for better visibility
+                      color: Color.fromARGB(
+                          255, 157, 157, 157), // Adjusted color for readability
+                    ),
+                  ),
                   const SizedBox(
-                      height: 80), // Increased spacing between text and button
+                    height: 20,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Username',
+                      fillColor: Colors.white, // Set fill color to white
+                      filled: true, // Enable fill color
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            color: Colors.grey), // Optional border color
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      fillColor: Colors.white, // Set fill color to white
+                      filled: true, // Enable fill color
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            color: Colors.grey), // Optional border color
+                      ),
+                    ),
+                  ),
+                  const Text(
+                    'Forgot Password?',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+
+                  const SizedBox(
+                      height: 50), // Adjust this height to change the distance
+                  // Get Started Button
                   ElevatedButton(
                     onPressed: () {
                       // Add button functionality here
