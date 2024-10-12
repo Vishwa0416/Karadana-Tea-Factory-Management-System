@@ -40,9 +40,12 @@ class MyHomePage extends StatelessWidget {
           ),
           // Content (text and buttons) on top of the image
           Center(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 40), // Add some horizontal padding
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 40), // Add some horizontal padding
+              padding: const EdgeInsets.only(
+                  top: 80.0), // Adjust this value as needed
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -95,13 +98,19 @@ class MyHomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Text(
-                    'Forgot Password?',
-                    style: TextStyle(color: Colors.blue),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(color: Colors.blue),
+                    ),
                   ),
 
                   const SizedBox(
-                      height: 50), // Adjust this height to change the distance
+                      height: 90), // Adjust this height to change the distance
                   // Get Started Button
                   ElevatedButton(
                     onPressed: () {
@@ -118,7 +127,7 @@ class MyHomePage extends StatelessWidget {
                       ),
                     ),
                     child: const Text(
-                      'Get Started',
+                      'LogIn',
                       style: TextStyle(
                         fontSize: 18, // Adjusted button text size
                         color: Colors.white, // White text for visibility
@@ -128,7 +137,7 @@ class MyHomePage extends StatelessWidget {
                 ],
               ),
             ),
-          ),
+          )),
         ],
       ),
     );
