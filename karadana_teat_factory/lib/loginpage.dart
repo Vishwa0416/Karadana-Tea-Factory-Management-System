@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:karadana_tea_factory/loginpage.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const LogIn());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class LogIn extends StatelessWidget {
+  const LogIn({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class MyHomePage extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                    'src/images/page01.png'), // Background image path
+                    'src/images/page02.png'), // Background image path
                 fit: BoxFit.cover,
               ),
             ),
@@ -65,10 +64,7 @@ class MyHomePage extends StatelessWidget {
                       height: 80), // Increased spacing between text and button
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const LogIn()),
-                      );
+                      // Add button functionality here
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green, // Button background color
