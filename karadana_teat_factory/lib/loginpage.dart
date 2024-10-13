@@ -108,10 +108,11 @@ class MyHomePage extends StatelessWidget {
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
+                  const SizedBox(height: 20),
+                  Text("Don'have an account? SignUp now."),
 
-                  const SizedBox(
-                      height: 90), // Adjust this height to change the distance
-                  // Get Started Button
+                  const SizedBox(height: 20),
+
                   ElevatedButton(
                     onPressed: () {
                       // Add button functionality here
