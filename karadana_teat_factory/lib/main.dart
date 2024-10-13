@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Background Image Demo',
+      title: 'First page of KTF',
       theme: ThemeData(
         useMaterial3: true,
       ),

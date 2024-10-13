@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+
+import 'signuppage.dart'; // Import TapGestureRecognizer
 
 void main() {
   runApp(const LogIn());
@@ -10,7 +13,7 @@ class LogIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Background Image Demo',
+      title: 'LogIn page of KTF',
       theme: ThemeData(
         useMaterial3: true,
       ),
@@ -40,106 +43,135 @@ class MyHomePage extends StatelessWidget {
           ),
           // Content (text and buttons) on top of the image
           Center(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 40), // Add some horizontal padding
             child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 80.0), // Adjust this value as needed
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // LogIn Text
-                  const Text(
-                    'LogIn',
-                    textAlign: TextAlign
-                        .center, // Center align the text for better fit
-                    style: TextStyle(
-                      fontSize: 30, // Increased font size for better visibility
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black, // Adjusted color for readability
-                    ),
-                  ),
-                  const Text(
-                    'Please LogIn to continue.',
-                    textAlign: TextAlign
-                        .center, // Center align the text for better fit
-                    style: TextStyle(
-                      fontSize: 15, // Increased font size for better visibility
-                      color: Color.fromARGB(
-                          255, 157, 157, 157), // Adjusted color for readability
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Username',
-                      fillColor: Colors.white, // Set fill color to white
-                      filled: true, // Enable fill color
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(
-                            color: Colors.grey), // Optional border color
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      fillColor: Colors.white, // Set fill color to white
-                      filled: true, // Enable fill color
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(
-                            color: Colors.grey), // Optional border color
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: const Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text("Don'have an account? SignUp now."),
-
-                  const SizedBox(height: 20),
-
-                  ElevatedButton(
-                    onPressed: () {
-                      // Add button functionality here
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green, // Button background color
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 70,
-                          vertical: 15), // Adjust button padding
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(30), // Rounded button
-                      ),
-                    ),
-                    child: const Text(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: 80.0), // Adjust this value as needed
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // LogIn Text
+                    const Text(
                       'LogIn',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 18, // Adjusted button text size
-                        color: Colors.white, // White text for visibility
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
-                  ),
-                ],
+                    const Text(
+                      'Please LogIn to continue.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color.fromARGB(255, 157, 157, 157),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Username',
+                        fillColor: Colors.white,
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        fillColor: Colors.white,
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: const Text(
+                        'Forgot Password?',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    RichText(
+                      text: TextSpan(
+                        text: "Don't have an account? ",
+                        style: const TextStyle(color: Colors.black),
+                        children: [
+                          TextSpan(
+                            text: 'SignUp',
+                            style: const TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const SignUp()),
+                                );
+                              },
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Add button functionality here
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 70, vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      child: const Text(
+                        'LogIn',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          )),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+// SignUp Page
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('SignUp Page'),
+      ),
+      body: const Center(
+        child: Text(
+          'Welcome to the SignUp Page!',
+          style: TextStyle(fontSize: 24),
+        ),
       ),
     );
   }
