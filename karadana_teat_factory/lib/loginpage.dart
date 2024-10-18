@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:karadana_tea_factory/homepage.dart';
 
 import 'signuppage.dart'; // Import TapGestureRecognizer
 
@@ -46,8 +47,7 @@ class MyHomePage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 80.0), // Adjust this value as needed
+                padding: const EdgeInsets.only(top: 80.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -128,7 +128,10 @@ class MyHomePage extends StatelessWidget {
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        // Add button functionality here
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Home()),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
