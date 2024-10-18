@@ -36,7 +36,7 @@ class MyHomePage extends StatelessWidget {
         ),
         child: const Center(
           child: Text(
-            'Home Page Content', // You can replace this with your page content
+            'KTF Home Page', // You can replace this with your page content
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
