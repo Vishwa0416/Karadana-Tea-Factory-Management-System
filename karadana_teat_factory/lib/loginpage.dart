@@ -72,7 +72,7 @@ class MyHomePage extends StatelessWidget {
                     const SizedBox(height: 20),
                     TextField(
                       decoration: InputDecoration(
-                        labelText: 'Username',
+                        labelText: 'Employee ID',
                         fillColor: Colors.white,
                         filled: true,
                         border: OutlineInputBorder(
@@ -108,7 +108,7 @@ class MyHomePage extends StatelessWidget {
                         style: const TextStyle(color: Colors.black),
                         children: [
                           TextSpan(
-                            text: 'SignUp',
+                            text: 'Add User',
                             style: const TextStyle(
                               color: Colors.blue,
                               decoration: TextDecoration.underline,

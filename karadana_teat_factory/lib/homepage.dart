@@ -34,16 +34,22 @@ class MyHomePage extends StatelessWidget {
             fit: BoxFit.cover, // Make sure the image covers the whole screen
           ),
         ),
-        child: const Center(
-          child: Text(
-            'KTF Home Page', // You can replace this with your page content
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
+        child: const Align(
+          alignment: Alignment.topLeft, // Align the text to the top left corner
+          child: Padding(
+            padding:
+                EdgeInsets.only(top: 50, left: 20), // Add padding if needed
+            child: Text(
+              'Hello User!', // You can replace this with your page content
+              style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
       ),
+
       bottomNavigationBar: const NavBar(), // Add the bottom navigation bar here
     );
   }
