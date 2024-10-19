@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:karadana_tea_factory/loginpage.dart';
 
 void main() {
   runApp(const SignUp());
@@ -51,7 +53,7 @@ class MyHomePage extends StatelessWidget {
                 children: [
                   // LogIn Text
                   const Text(
-                    'SignUp',
+                    'Add User',
                     textAlign: TextAlign
                         .center, // Center align the text for better fit
                     style: TextStyle(
@@ -61,7 +63,7 @@ class MyHomePage extends StatelessWidget {
                     ),
                   ),
                   const Text(
-                    'Please SignUp to continue.',
+                    'Please add following details to add another user.',
                     textAlign: TextAlign
                         .center, // Center align the text for better fit
                     style: TextStyle(
@@ -143,8 +145,29 @@ class MyHomePage extends StatelessWidget {
                     height: 10,
                   ),
                   const SizedBox(height: 20),
-                  Text("Already have an account? SignIn now."),
-
+                  RichText(
+                    text: TextSpan(
+                      text: "Already have an account? ",
+                      style: const TextStyle(color: Colors.black),
+                      children: [
+                        TextSpan(
+                          text: 'LogIn',
+                          style: const TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LogIn()),
+                              );
+                            },
+                        ),
+                      ],
+                    ),
+                  ),
                   const SizedBox(height: 20),
 
                   ElevatedButton(
@@ -162,7 +185,7 @@ class MyHomePage extends StatelessWidget {
                       ),
                     ),
                     child: const Text(
-                      'SignUp',
+                      'Add User',
                       style: TextStyle(
                         fontSize: 18, // Adjusted button text size
                         color: Colors.white, // White text for visibility
