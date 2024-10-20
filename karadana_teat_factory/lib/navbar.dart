@@ -13,9 +13,9 @@ class _BottomNavBarState extends State<NavBar> {
   // List of pages for navigation
   static const List<Widget> _pages = <Widget>[
     Text('Home Page'),
+    Text('Notifications Page'),
     Text('Search Page'),
     Text('Settings Page'),
-    Text('Notifications Page'),
   ];
 
   void _onItemTapped(int index) {
@@ -34,16 +34,16 @@ class _BottomNavBarState extends State<NavBar> {
           label: 'Home',
         ),
         BottomNavigationBarItem(
+          icon: Icon(Icons.notifications),
+          label: 'Notifications',
+        ),
+        BottomNavigationBarItem(
           icon: Icon(Icons.search),
           label: 'Search',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
           label: 'Settings',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.notifications),
-          label: 'Notifications',
         ),
       ],
       currentIndex: _selectedIndex,
