@@ -16,6 +16,7 @@ class _BottomNavBarState extends State<NavBar> {
     Text('Notifications Page'),
     Text('Search Page'),
     Text('Settings Page'),
+    Text('Supplier'),
   ];
 
   void _onItemTapped(int index) {
@@ -44,6 +45,10 @@ class _BottomNavBarState extends State<NavBar> {
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
           label: 'Settings',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.settings),
+          label: 'Supplier',
         ),
       ],
       currentIndex: _selectedIndex,
