@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+<<<<<<< HEAD:karadana_teat_factory/lib/loginpage.dart
 import 'package:karadana_tea_factory/forgotpassword.dart';
 import 'package:karadana_tea_factory/homepage.dart';
+=======
+import 'package:karadana_tea_factory/screens/home/homepage.dart';
+>>>>>>> 6fec4b53a901ce45c5ddb6246077c5da053d619a:karadana_teat_factory/lib/screens/auth/loginpage.dart
+
+import 'signuppage.dart'; // Import TapGestureRecognizer
 
 void main() {
   runApp(const LogIn());
@@ -127,7 +133,7 @@ class MyHomePage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const SignUpPage()),
+                                      builder: (context) => const SignUp()),
                                 );
                               },
                           ),

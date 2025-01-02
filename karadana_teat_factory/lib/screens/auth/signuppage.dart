@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:karadana_tea_factory/loginpage.dart';
+import 'package:karadana_tea_factory/screens/auth/loginpage.dart';
 
 void main() {
   runApp(const SignUp());
