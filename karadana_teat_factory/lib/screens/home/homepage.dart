@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:karadana_tea_factory/screens/supplier/supplier.dart';
+
 import '../../widgets/navbar.dart';
 
 void main() {
@@ -11,7 +13,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Home page of KTF',
+      title: 'Home Page of KTF',
       theme: ThemeData(
         useMaterial3: true,
       ),
@@ -33,101 +35,59 @@ class MyHomePage extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image:
-                    AssetImage('src/images/home.png'), // Background image path
-                fit:
-                    BoxFit.cover, // Make sure the image covers the whole screen
+                image: AssetImage('src/images/home.png'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
 
           // "Hello User" text
           const Align(
-            alignment:
-                Alignment.topLeft, // Align the text to the top left corner
+            alignment: Alignment.topLeft,
             child: Padding(
-              padding:
-                  EdgeInsets.only(top: 50, left: 20), // Add padding if needed
+              padding: EdgeInsets.only(top: 50, left: 20),
               child: Text(
-                'Hello User!', // You can replace this with your page content
+                'Hello User!',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold),
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
 
-          // "Add Leaf Weight" box
+          // "Add Supplier" box
           Positioned(
-            top: 140, // Position the box from the top
-            left: 50, // Position the box from the right
+            top: 260,
+            left: 50,
             child: GestureDetector(
               onTap: () {
-                // Add the functionality for what happens when the box is tapped
-                print('Add Leaf Weight box tapped!');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Supplier()),
+                );
               },
               child: Container(
-                padding: const EdgeInsets.all(10), // Box padding
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.green, // Box color
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.3),
                       blurRadius: 5,
                       spreadRadius: 2,
-                    )
-                  ],
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min, // Keep the box size minimal
-                  children: const [
-                    Icon(Icons.add, color: Colors.white), // Plus icon
-                    SizedBox(width: 5), // Space between icon and text
-                    Text(
-                      'Add Leaf Weight',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
                     ),
                   ],
                 ),
-              ),
-            ),
-          ),
-
-          //Add location box
-          Positioned(
-            top: 200, // Position the box from the top
-            left: 50, // Position the box from the right
-            child: GestureDetector(
-              onTap: () {
-                // Add the functionality for what happens when the box is tapped
-                print('Add Location box tapped!');
-              },
-              child: Container(
-                padding: const EdgeInsets.all(10), // Box padding
-                decoration: BoxDecoration(
-                  color: Colors.green, // Box color
-                  borderRadius: BorderRadius.circular(10), // Rounded corners
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      blurRadius: 5,
-                      spreadRadius: 2,
-                    )
-                  ],
-                ),
                 child: Row(
-                  mainAxisSize: MainAxisSize.min, // Keep the box size minimal
+                  mainAxisSize: MainAxisSize.min,
                   children: const [
-                    Icon(Icons.add, color: Colors.white), // Plus icon
-                    SizedBox(width: 5), // Space between icon and text
+                    Icon(Icons.person_add, color: Colors.white),
+                    SizedBox(width: 5),
                     Text(
-                      'Add Location',
+                      'Add Supplier',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -141,8 +101,7 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       ),
-
-      bottomNavigationBar: const NavBar(), // Add the bottom navigation bar here
+      bottomNavigationBar: const NavBar(),
     );
   }
 }
