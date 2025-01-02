@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:karadana_tea_factory/forgotpassword.dart';
-import 'package:karadana_tea_factory/homepage.dart';
+import 'package:karadana_tea_factory/screens/home/homepage.dart';
 
 class OTP extends StatefulWidget {
   const OTP({Key? key}) : super(key: key);
