@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:karadana_tea_factory/loginpage.dart';
 import 'package:karadana_tea_factory/otppage.dart';
+import 'package:karadana_tea_factory/screens/auth/loginpage.dart';
 
 class Forgot extends StatelessWidget {
   const Forgot({Key? key}) : super(key: key);
@@ -22,7 +22,8 @@ class Forgot extends StatelessWidget {
                   ),
                 );
               },
-              child: Image.asset('assets/arrow.png'),
+              child: Image.asset(
+                  'src/images/arrow.png'), // Corrected usage of AssetImage
             ),
           ),
           Center(
@@ -64,7 +65,7 @@ class Forgot extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(vertical: 15, horizontal: 80),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 33, 54, 243),
+                        color: Colors.green,
                         borderRadius: BorderRadius.circular(8),
                         boxShadow: [
                           BoxShadow(
