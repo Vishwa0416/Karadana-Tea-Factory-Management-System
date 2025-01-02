@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:karadana_tea_factory/forgotpassword.dart';
 import 'package:karadana_tea_factory/homepage.dart';
 
 import 'signuppage.dart'; // Import TapGestureRecognizer
@@ -94,11 +95,21 @@ class MyHomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: const Text(
-                        'Forgot Password?',
-                        style: TextStyle(color: Colors.blue),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Forgot(),
+                          ),
+                        );
+                      },
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: const Text(
+                          'Forgot Password?',
+                          style: TextStyle(color: Colors.blue),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 20),
