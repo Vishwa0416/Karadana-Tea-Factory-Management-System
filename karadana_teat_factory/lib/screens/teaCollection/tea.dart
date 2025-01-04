@@ -1,27 +1,35 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class Supplier extends StatefulWidget {
-  const Supplier({super.key});
+class teaCollection extends StatefulWidget {
+  const teaCollection({super.key});
 
   @override
-  State<Supplier> createState() => _MyWidgetState();
+  State<teaCollection> createState() => _nameState();
 }
 
-class _MyWidgetState extends State<Supplier> {
+class _nameState extends State<teaCollection> {
+  @override
+
   //controller for form
   final TextEditingController _nameController = TextEditingController();
-  @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Supplier form"),
+        title: const Text("TeaCollection form"),
         backgroundColor: Colors.green,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(
+                labelText: 'Supplier Name',
+                border: OutlineInputBorder(),
+              ),
+            ),
             TextField(
               controller: _nameController,
               decoration: const InputDecoration(

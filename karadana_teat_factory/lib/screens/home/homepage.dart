@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:karadana_tea_factory/screens/supplier/supplier.dart';
+import 'package:karadana_tea_factory/screens/teaCollection/tea.dart';
 
 import '../../widgets/navbar.dart';
 
@@ -88,6 +89,48 @@ class MyHomePage extends StatelessWidget {
                     SizedBox(width: 5),
                     Text(
                       'Add Supplier',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 400,
+            left: 50,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const teaCollection()),
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      blurRadius: 5,
+                      spreadRadius: 2,
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(Icons.person_add, color: Colors.white),
+                    SizedBox(width: 5),
+                    Text(
+                      'Add TeaCollection',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
