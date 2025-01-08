@@ -1,22 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class teaCollection extends StatefulWidget {
-  const teaCollection({super.key});
+class TeaCollection extends StatefulWidget {
+  const TeaCollection({super.key});
 
   @override
-  State<teaCollection> createState() => _nameState();
+  State<TeaCollection> createState() => _TeaCollectionState();
 }
 
-class _nameState extends State<teaCollection> {
+class _TeaCollectionState extends State<TeaCollection> {
+  // Controller for the single text field
+  final TextEditingController _collectorNameController =
+      TextEditingController();
+  final TextEditingController _quantityController = TextEditingController();
+  final TextEditingController _qualityController = TextEditingController();
+
+  // API Base URL
+  static const String baseUrl = 'http://192.168.132.192:8000/api/tealeaves/';
+
+  // Method to submit form data to the backend
+  Future<void> _submitData() async {
+    final Map<String, dynamic> teaData = {
+      'collector_name': _collectorNameController.text,
+      'quantity': _quantityController.text,
+      'quality': _qualityController.text,
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse(baseUrl),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonEncode(teaData),
+      );
+
+      if (response.statusCode == 201) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Data submitted successfully!')),
+        );
+        _clearForm();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${response.statusCode}')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('An error occurred: $e')),
+      );
+    }
+  }
+
+  // Clear form field
+  void _clearForm() {
+    _collectorNameController.clear();
+    _quantityController.clear();
+    _qualityController.clear();
+  }
+
   @override
-
-  //controller for form
-  final TextEditingController _nameController = TextEditingController();
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("TeaCollection form"),
+        title: const Text("Tea Collection Form"),
         backgroundColor: Colors.green,
       ),
       body: Padding(
@@ -24,47 +72,33 @@ class _nameState extends State<teaCollection> {
         child: Column(
           children: [
             TextField(
-              controller: _nameController,
+              controller: _collectorNameController,
               decoration: const InputDecoration(
-                labelText: 'Supplier Name',
+                labelText: 'Collector Name',
                 border: OutlineInputBorder(),
               ),
             ),
+            const SizedBox(height: 20),
             TextField(
-              controller: _nameController,
+              controller: _quantityController,
               decoration: const InputDecoration(
-                labelText: 'Supplier Name',
+                labelText: 'Quantity',
                 border: OutlineInputBorder(),
               ),
             ),
+            const SizedBox(height: 20),
             TextField(
-              controller: _nameController,
+              controller: _collectorNameController,
               decoration: const InputDecoration(
-                labelText: 'Supplier Name',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: 'Supplier Name',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: 'Supplier Name',
+                labelText: 'Quality',
                 border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                print("suppler Name: ${_nameController}");
-              },
-              child: const Text('submit'),
-            )
+              onPressed: _submitData,
+              child: const Text('Submit'),
+            ),
           ],
         ),
       ),

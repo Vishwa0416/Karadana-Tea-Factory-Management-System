@@ -108,7 +108,7 @@ class MyHomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const teaCollection()),
+                      builder: (context) => const TeaCollection()),
                 );
               },
               child: Container(

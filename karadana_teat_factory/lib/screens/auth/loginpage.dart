@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:karadana_tea_factory/forgotpassword.dart';
 import 'package:karadana_tea_factory/screens/home/homepage.dart';
 
-import 'signuppage.dart'; // Import TapGestureRecognizer
+import 'signuppage.dart';
 
 void main() {
   runApp(const LogIn());
@@ -15,128 +14,108 @@ class LogIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'LogIn page of KTF',
+      title: 'LogIn Page of KTF',
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: const LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          // Background image
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                    'src/images/page02.png'), // Background image path
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          // Content (text and buttons) on top of the image
+          // Background gradient
+
+          // Content
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 80.0),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // LogIn Text
-                    const Text(
-                      'LogIn',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    const Text(
-                      'Please LogIn to continue.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Color.fromARGB(255, 157, 157, 157),
-                      ),
+                    // Logo
+                    Image.asset(
+                      'src/images/page01.png',
+                      height: 100,
                     ),
                     const SizedBox(height: 20),
+                    const Text(
+                      'Welcome back!',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      'Log in to continue',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+
+                    // Username field
                     TextField(
                       decoration: InputDecoration(
-                        labelText: 'Employee ID',
-                        fillColor: Colors.white,
+                        hintText: 'Employee ID',
                         filled: true,
+                        prefixIcon:
+                            const Icon(Icons.person, color: Colors.grey),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide.none,
                         ),
                       ),
                     ),
                     const SizedBox(height: 20),
+
+                    // Password field
                     TextField(
+                      obscureText: true,
                       decoration: InputDecoration(
-                        labelText: 'Password',
-                        fillColor: Colors.white,
+                        hintText: 'Password',
                         filled: true,
+                        prefixIcon: const Icon(Icons.lock, color: Colors.grey),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide.none,
                         ),
                       ),
                     ),
                     const SizedBox(height: 10),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Forgot(),
-                          ),
-                        );
-                      },
-                      child: Align(
-                        alignment: Alignment.centerLeft,
+
+                    // Forgot password
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Forgot()),
+                          );
+                        },
                         child: const Text(
                           'Forgot Password?',
-                          style: TextStyle(color: Colors.blue),
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 20),
-                    RichText(
-                      text: TextSpan(
-                        text: "Don't have an account? ",
-                        style: const TextStyle(color: Colors.black),
-                        children: [
-                          TextSpan(
-                            text: 'Add User',
-                            style: const TextStyle(
-                              color: Colors.blue,
-                              decoration: TextDecoration.underline,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const SignUp()),
-                                );
-                              },
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 20),
+
+                    // Login button
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -145,19 +124,43 @@ class MyHomePage extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 70, vertical: 15),
+                        backgroundColor: Colors.blueAccent,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 100, vertical: 15),
                       ),
                       child: const Text(
-                        'LogIn',
+                        'Log In',
                         style: TextStyle(
                           fontSize: 18,
-                          color: Colors.white,
                         ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Sign up link
+                    RichText(
+                      text: TextSpan(
+                        text: "New user? ",
+                        children: [
+                          TextSpan(
+                            text: 'Sign Up',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const SignUpPage()),
+                                );
+                              },
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -171,7 +174,25 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-// SignUp Page
+class Forgot extends StatelessWidget {
+  const Forgot({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Forgot Password'),
+      ),
+      body: const Center(
+        child: Text(
+          'Reset Password Page',
+          style: TextStyle(fontSize: 24),
+        ),
+      ),
+    );
+  }
+}
+
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
 
