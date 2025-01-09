@@ -33,62 +33,56 @@ class MyHomePage extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(
-                    'src/images/page01.png'), // Background image path
-                fit: BoxFit.cover,
+                image:
+                    AssetImage('src/images/logo.png'), // Background image path
               ),
             ),
           ),
-          // Content (text and buttons) on top of the image
+          // Welcome text
+          SizedBox(
+            height: 10,
+          ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 40, // Add some horizontal padding
+              padding: const EdgeInsets.only(top: 300),
+              child: const Text(
+                'Welcome to The Karadana Tea Factory\nManagement System',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 150,
+            ),
+          ),
+          // Button at the bottom of the page
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 30.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LogIn()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green, // Button background color
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 70, vertical: 15), // Button padding
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10), // Rounded corners
                   ),
-                  const Text(
-                    'Welcome to The Karadana Tea Factory\nManagement System',
-                    textAlign: TextAlign
-                        .center, // Center align the text for better fit
-                    style: TextStyle(
-                      fontSize: 20, // Increased font size for better visibility
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black, // Adjusted color for readability
-                    ),
+                ),
+                child: const Text(
+                  'Get Started',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
                   ),
-                  const SizedBox(
-                      height: 80), // Increased spacing between text and button
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const LogIn()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green, // Button background color
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 70,
-                          vertical: 15), // Adjust button padding
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(30), // Rounded button
-                      ),
-                    ),
-                    child: const Text(
-                      'Get Started',
-                      style: TextStyle(
-                        fontSize: 18, // Adjusted button text size
-                        color: Colors.white, // White text for visibility
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
           ),

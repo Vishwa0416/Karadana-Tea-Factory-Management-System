@@ -44,8 +44,8 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     // Logo
                     Image.asset(
-                      'src/images/page01.png',
-                      height: 100,
+                      'src/images/logo.png',
+                      height: 200,
                     ),
                     const SizedBox(height: 20),
                     const Text(
@@ -72,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                         prefixIcon:
                             const Icon(Icons.person, color: Colors.grey),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide.none,
                         ),
                       ),
@@ -87,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                         filled: true,
                         prefixIcon: const Icon(Icons.lock, color: Colors.grey),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide.none,
                         ),
                       ),
@@ -124,9 +124,9 @@ class LoginScreen extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
+                        backgroundColor: Colors.green,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 100, vertical: 15),
