@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:karadana_tea_factory/screens/home/homepage.dart';
-
-import 'signuppage.dart';
+// import 'package:flutter_secure_storage/flutter_secure_storage.dart'; // Commented out for now
 
 void main() {
   runApp(const LogIn());
@@ -29,12 +28,39 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Temporarily disabling secure storage logic
+    /*
+    final FlutterSecureStorage secureStorage = FlutterSecureStorage();
+    Future<void> login(String employeeID, String password) async {
+      String simulatedToken = "your_simulated_jwt_token";
+      await secureStorage.write(key: 'jwt_token', value: simulatedToken);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Home()),
+      );
+    }
+    */
+
+    // Temporary login logic
+    void temporaryLogin(String employeeID, String password) {
+      if (employeeID.isNotEmpty && password.isNotEmpty) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Home()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please enter valid credentials')),
+        );
+      }
+    }
+
+    final TextEditingController employeeIDController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       body: Stack(
         children: [
-          // Background gradient
-
-          // Content
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -42,7 +68,6 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Logo
                     Image.asset(
                       'src/images/logo.png',
                       height: 200,
@@ -63,9 +88,8 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 30),
-
-                    // Username field
                     TextField(
+                      controller: employeeIDController,
                       decoration: InputDecoration(
                         hintText: 'Employee ID',
                         filled: true,
@@ -78,9 +102,8 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-
-                    // Password field
                     TextField(
+                      controller: passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         hintText: 'Password',
@@ -92,35 +115,12 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
-
-                    // Forgot password
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Forgot()),
-                          );
-                        },
-                        child: const Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ),
                     const SizedBox(height: 20),
-
-                    // Login button
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Home()),
+                        temporaryLogin(
+                          employeeIDController.text,
+                          passwordController.text,
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -138,75 +138,12 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-
-                    // Sign up link
-                    RichText(
-                      text: TextSpan(
-                        text: "New user? ",
-                        children: [
-                          TextSpan(
-                            text: 'Sign Up',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const SignUpPage()),
-                                );
-                              },
-                          ),
-                        ],
-                      ),
-                    ),
                   ],
                 ),
               ),
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class Forgot extends StatelessWidget {
-  const Forgot({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Forgot Password'),
-      ),
-      body: const Center(
-        child: Text(
-          'Reset Password Page',
-          style: TextStyle(fontSize: 24),
-        ),
-      ),
-    );
-  }
-}
-
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('SignUp Page'),
-      ),
-      body: const Center(
-        child: Text(
-          'Welcome to the SignUp Page!',
-          style: TextStyle(fontSize: 24),
-        ),
       ),
     );
   }
