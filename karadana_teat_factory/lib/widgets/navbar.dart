@@ -12,11 +12,10 @@ class _BottomNavBarState extends State<NavBar> {
 
   // List of pages for navigation
   static const List<Widget> _pages = <Widget>[
-    Text('Home Page'),
-    Text('Notifications Page'),
-    Text('Search Page'),
-    Text('Settings Page'),
-    Text('Supplier'),
+    Text('Home'),
+    Text('Weight'),
+    Text('Anomaly'),
+    Text('Settings'),
   ];
 
   void _onItemTapped(int index) {
@@ -29,26 +28,23 @@ class _BottomNavBarState extends State<NavBar> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
+      backgroundColor: const Color.fromARGB(185, 183, 255, 185),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.notifications),
-          label: 'Notifications',
+          icon: Icon(Icons.line_weight),
+          label: 'Weight',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.search),
-          label: 'Search',
+          label: 'Anomaly',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
           label: 'Settings',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          label: 'Supplier',
         ),
       ],
       currentIndex: _selectedIndex,
