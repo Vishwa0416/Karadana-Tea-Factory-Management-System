@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:karadana_tea_factory/screens/profile/profile.dart';
 import 'package:karadana_tea_factory/screens/supplier/supplier.dart';
 import 'package:karadana_tea_factory/screens/teaCollection/tea.dart';
 import 'package:karadana_tea_factory/widgets/navbar.dart';
@@ -77,6 +78,9 @@ class _HomePageState extends State<HomePage> {
     } else if (index == 2) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const Supplier()));
+    } else if (index == 3) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const ProfilePage()));
     }
   }
 
@@ -88,7 +92,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -102,6 +106,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
+
+            // 🔹 Dashboard Summary Grid
+            _buildDashboardSummary(),
+
             const SizedBox(height: 20),
 
             // 🍃 Tea Collection Summary
@@ -121,6 +130,62 @@ class _HomePageState extends State<HomePage> {
         onItemTapped: _onItemTapped,
       ),
     );
+  }
+
+  // 🔹 Dashboard Summary Grid
+  Widget _buildDashboardSummary() {
+    return GridView.count(
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      children: [
+        _buildSummaryCard(
+            "Total Suppliers", "${suppliers.length}", Icons.group, Colors.blue),
+        _buildSummaryCard("Today's Tea Collected", "${_calculateTeaTotal()} kg",
+            Icons.eco, Colors.green),
+        _buildSummaryCard(
+            "Top Supplier", _getTopSupplier(), Icons.star, Colors.orange),
+        _buildSummaryCard(
+            "Upcoming Reminders", "3 Pending", Icons.notifications, Colors.red),
+      ],
+    );
+  }
+
+  // 📌 Summary Card Widget
+  Widget _buildSummaryCard(
+      String title, String value, IconData icon, Color color) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 4,
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: color, size: 40),
+            const SizedBox(height: 10),
+            Text(title,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            Text(value, style: const TextStyle(fontSize: 18)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // 🔢 Calculate Today's Tea Collection Total
+  double _calculateTeaTotal() {
+    return teaCollections.fold(0.0, (sum, tea) => sum + (tea['quantity'] ?? 0));
+  }
+
+  // 🌟 Get Top Supplier
+  String _getTopSupplier() {
+    if (teaCollections.isEmpty) return "N/A";
+    teaCollections.sort((a, b) => b['quantity'].compareTo(a['quantity']));
+    return teaCollections.first['collector_name'];
   }
 
   // 🔹 Section Header with View All Button
