@@ -67,6 +67,12 @@ flutter:
     - src/images/page02.png
     - src/images/signup.png
     - src/images/home.png
+    - src/images/signuptea.jpg
+    - src/images/Tour-a-Sri-Lankan-tea-estate-header.jpg
+    - src/images/man1.webp
+    - src/images/man2.jpg
+    - src/images/man3.jpg
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

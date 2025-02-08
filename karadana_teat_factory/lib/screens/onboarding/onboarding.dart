@@ -15,9 +15,9 @@ class OnboardingScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/onboarding_image.png',
+            Image.asset('./src/images/logo.png',
                 height: 250, fit: BoxFit.cover),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
 
             const Text(
               "Welcome to Karadana Tea Factory",

@@ -47,22 +47,21 @@ class _SplashScreenState extends State<SplashScreen>
             MaterialPageRoute(builder: (context) => const OnboardingScreen()));
       },
       child: Scaffold(
-        backgroundColor: Colors.green,
         body: Center(
           child: ScaleTransition(
             scale: _scaleAnimation,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset('assets/images/company_logo.png',
-                    height: 120), // ✅ Ensure this image exists
-                const SizedBox(height: 10),
+                Image.asset('./src/images/logo.png',
+                    height: 180), // ✅ Ensure this image exists
+                const SizedBox(height: 5),
                 const Text(
                   "Karadana Tea Factory",
                   style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                      color: Colors.black),
                 ),
               ],
             ),

@@ -62,15 +62,19 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 // Logo
                 Image.asset(
-                  'assets/images/logo.png',
+                  'src/images/Tour-a-Sri-Lankan-tea-estate-header.jpg',
                   height: 150,
                 ),
                 const SizedBox(height: 20),
 
                 // Welcome Text
                 const Text(
-                  'Welcome Back!',
+                  'LOGIN',
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                ),
+                const Text(
+                  'Welcome Back!',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: 5),
                 const Text(
@@ -137,7 +141,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: const Text(
                         "Forgot Password?",
-                        style: TextStyle(color: Colors.green),
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
                   ],

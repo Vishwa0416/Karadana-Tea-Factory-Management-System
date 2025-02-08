@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Dashboard')),
+        title: const Center(child: Text('Home')),
         backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
@@ -143,12 +143,12 @@ class _HomePageState extends State<HomePage> {
       children: [
         _buildSummaryCard(
             "Total Suppliers", "${suppliers.length}", Icons.group, Colors.blue),
-        _buildSummaryCard("Today's Tea Collected", "${_calculateTeaTotal()} kg",
-            Icons.eco, Colors.green),
         _buildSummaryCard(
             "Top Supplier", _getTopSupplier(), Icons.star, Colors.orange),
+        _buildSummaryCard("TeaCollection", "${_calculateTeaTotal()} kg",
+            Icons.eco, Colors.green),
         _buildSummaryCard(
-            "Upcoming Reminders", "3 Pending", Icons.notifications, Colors.red),
+            "Reminders", "3 Pending", Icons.notifications, Colors.red),
       ],
     );
   }
@@ -168,8 +168,8 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 10),
             Text(title,
                 style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            Text(value, style: const TextStyle(fontSize: 18)),
+                    const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+            Text(value, style: const TextStyle(fontSize: 12)),
           ],
         ),
       ),
@@ -232,7 +232,8 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(12),
         child: Column(
           children: [
-            Image.asset('assets/images/tea.png', height: 80, fit: BoxFit.cover),
+            Image.asset('./src/images/man1.webp',
+                height: 80, fit: BoxFit.cover),
             const SizedBox(height: 5),
             Text(collector,
                 style: const TextStyle(fontWeight: FontWeight.bold)),
@@ -266,15 +267,14 @@ class _HomePageState extends State<HomePage> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 5,
       child: Container(
-        width: 180,
+        height: 140,
         padding: const EdgeInsets.all(12),
         child: Column(
           children: [
-            Image.asset('assets/images/supplier.png',
-                height: 80, fit: BoxFit.cover),
-            const SizedBox(height: 5),
+            Image.asset('./src/images/man3.jpg', height: 60, fit: BoxFit.cover),
+            const SizedBox(height: 8),
             Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
-            Text("Contact: $contact", style: const TextStyle(fontSize: 14)),
+            Text("$contact", style: const TextStyle(fontSize: 10)),
           ],
         ),
       ),

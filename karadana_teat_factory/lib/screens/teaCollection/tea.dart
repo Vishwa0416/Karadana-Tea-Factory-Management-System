@@ -14,13 +14,16 @@ class _TeaCollectionState extends State<TeaCollection> {
   final TextEditingController _collectorNameController =
       TextEditingController();
   final TextEditingController _quantityController = TextEditingController();
-  final TextEditingController _qualityController = TextEditingController();
 
   // API Base URL
   static const String baseUrl = 'http://192.168.132.192:8000/api/tealeaves/';
   List<Map<String, dynamic>> teaCollections = [];
   bool isEditing = false;
   int? editingId;
+
+  // Quality options for dropdown
+  String? _selectedQuality = 'A';
+  List<String> qualityOptions = ['A', 'AA', 'AAA'];
 
   @override
   void initState() {
@@ -30,35 +33,30 @@ class _TeaCollectionState extends State<TeaCollection> {
 
   // Sample JSON Data (Used when API is unavailable)
   List<Map<String, dynamic>> mockTeaData = [
-    {
-      "id": 1,
-      "collector_name": "John Doe",
-      "quantity": 15.5,
-      "quality": "High"
-    },
+    {"id": 1, "collector_name": "John Doe", "quantity": 15.5, "quality": "A"},
     {
       "id": 2,
       "collector_name": "Jane Smith",
       "quantity": 20.0,
-      "quality": "Medium"
+      "quality": "AA"
     },
     {
       "id": 3,
       "collector_name": "Samuel Adams",
       "quantity": 18.2,
-      "quality": "Low"
+      "quality": "AAA"
     },
     {
       "id": 4,
       "collector_name": "Emily Johnson",
       "quantity": 25.0,
-      "quality": "High"
+      "quality": "A"
     },
     {
       "id": 5,
       "collector_name": "Michael Brown",
       "quantity": 10.5,
-      "quality": "Medium"
+      "quality": "AA"
     }
   ];
 
@@ -90,7 +88,7 @@ class _TeaCollectionState extends State<TeaCollection> {
     final Map<String, dynamic> teaData = {
       'collector_name': _collectorNameController.text,
       'quantity': _quantityController.text,
-      'quality': _qualityController.text,
+      'quality': _selectedQuality,
     };
 
     try {
@@ -143,7 +141,7 @@ class _TeaCollectionState extends State<TeaCollection> {
       editingId = tea['id'];
       _collectorNameController.text = tea['collector_name'];
       _quantityController.text = tea['quantity'].toString();
-      _qualityController.text = tea['quality'];
+      _selectedQuality = tea['quality'];
     });
   }
 
@@ -151,10 +149,10 @@ class _TeaCollectionState extends State<TeaCollection> {
   void _clearForm() {
     _collectorNameController.clear();
     _quantityController.clear();
-    _qualityController.clear();
     setState(() {
       isEditing = false;
       editingId = null;
+      _selectedQuality = 'A'; // Reset dropdown to default value
     });
   }
 
@@ -195,12 +193,24 @@ class _TeaCollectionState extends State<TeaCollection> {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    TextField(
-                      controller: _qualityController,
+                    // Dropdown for quality
+                    DropdownButtonFormField<String>(
+                      value: _selectedQuality,
                       decoration: const InputDecoration(
                         labelText: 'Quality',
                         border: OutlineInputBorder(),
                       ),
+                      items: qualityOptions.map((String quality) {
+                        return DropdownMenuItem<String>(
+                          value: quality,
+                          child: Text(quality),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedQuality = newValue!;
+                        });
+                      },
                     ),
                     const SizedBox(height: 15),
                     Row(

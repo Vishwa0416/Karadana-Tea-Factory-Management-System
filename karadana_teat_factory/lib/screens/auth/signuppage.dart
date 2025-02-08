@@ -77,16 +77,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Logo
-              Image.asset(
-                'assets/images/signup.png',
-                height: 120,
+              // Image as Top Cover
+              Container(
+                width: double.infinity,
+                height: 200, // Adjust height to cover top of screen
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image:
+                        AssetImage('./src/images/signuptea.jpg'), // Your image
+                    fit: BoxFit
+                        .cover, // Make the image cover the top part of the screen
+                  ),
+                ),
               ),
-              const SizedBox(height: 20),
 
               // Title
               const Text(
-                'Add User',
+                'Sign Up',
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 5),
