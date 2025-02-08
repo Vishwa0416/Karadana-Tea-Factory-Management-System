@@ -54,7 +54,7 @@ class _OTPScreenState extends State<OTP> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => const Home(),
+        builder: (context) => HomePage(),
       ),
     );
   }
