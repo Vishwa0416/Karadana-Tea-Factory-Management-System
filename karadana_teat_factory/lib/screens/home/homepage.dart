@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:karadana_tea_factory/screens/supplier/supplier.dart';
 import 'package:karadana_tea_factory/screens/teaCollection/tea.dart';
-import '../../widgets/navbar.dart';
+import 'package:karadana_tea_factory/widgets/navbar.dart';
+import 'package:karadana_tea_factory/services/api_services.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,50 +13,86 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  List<Map<String, dynamic>> teaCollections = [];
+  List<Map<String, dynamic>> suppliers = [];
 
-  // Define pages for navigation
-  final List<Widget> _pages = [
-    const HomePageContent(),
-    const TeaCollection(),
-    const Supplier(),
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  // Fetch Tea Collection & Supplier Data
+  Future<void> _fetchData() async {
+    try {
+      final ApiService apiService = ApiService();
+      final teaResponse = await apiService.get('tealeaves/');
+      final supplierResponse = await apiService.get('suppliers/');
+
+      setState(() {
+        teaCollections = (teaResponse is List)
+            ? List<Map<String, dynamic>>.from(teaResponse)
+            : mockTeaData;
+        suppliers = (supplierResponse is List)
+            ? List<Map<String, dynamic>>.from(supplierResponse)
+            : mockSupplierData;
+      });
+    } catch (e) {
+      setState(() {
+        teaCollections = mockTeaData;
+        suppliers = mockSupplierData;
+      });
+    }
+  }
+
+  // Mock Data (Used if API Fails)
+  List<Map<String, dynamic>> mockTeaData = [
+    {
+      "id": 1,
+      "collector_name": "John Doe",
+      "quantity": 15.5,
+      "quality": "High"
+    },
+    {
+      "id": 2,
+      "collector_name": "Jane Smith",
+      "quantity": 20.0,
+      "quality": "Medium"
+    },
+  ];
+
+  List<Map<String, dynamic>> mockSupplierData = [
+    {"id": 1, "name": "Green Tea Suppliers", "contact": "+94 77 123 4567"},
+    {"id": 2, "name": "Ceylon Leaf Traders", "contact": "+94 76 987 6543"},
   ];
 
   void _onItemTapped(int index) {
-    if (mounted) {
-      setState(() {
-        _selectedIndex = index;
-      });
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    if (index == 1) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const TeaCollection()));
+    } else if (index == 2) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const Supplier()));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: CustomNavBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
-    );
-  }
-}
-
-class HomePageContent extends StatelessWidget {
-  const HomePageContent({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Home')),
-        backgroundColor: Colors.lightGreen[200],
+        title: const Center(child: Text('Dashboard')),
+        backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Search Bar
+            // 🔍 Search Bar
             TextField(
               decoration: InputDecoration(
                 hintText: 'Search',
@@ -67,103 +104,115 @@ class HomePageContent extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // Featured Products
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                'Featured Products',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(height: 10),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildProductCard('Tomatoes', 'assets/tomatoes.png', 4.63),
-                _buildProductCard('Onions', 'assets/onions.png', 3.02),
-              ],
-            ),
+            // 🍃 Tea Collection Summary
+            _buildSectionHeader("Recent Tea Collections", TeaCollection()),
+            _buildTeaCollectionCards(),
 
             const SizedBox(height: 20),
 
-            // Services
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                'Services',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(height: 10),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildServiceButton('Prediction'),
-                _buildServiceButton('Seeds'),
-                _buildServiceButton('Workers'),
-              ],
-            ),
+            // 📦 Supplier Summary
+            _buildSectionHeader("Top Suppliers", Supplier()),
+            _buildSupplierCards(),
           ],
         ),
+      ),
+      bottomNavigationBar: CustomNavBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
   }
 
-  Widget _buildProductCard(String name, String imagePath, double price) {
-    return Expanded(
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        elevation: 5,
-        shadowColor: Colors.grey.withOpacity(0.5),
+  // 🔹 Section Header with View All Button
+  Widget _buildSectionHeader(String title, Widget page) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(title,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        TextButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => page));
+          },
+          child: const Text("View All"),
+        ),
+      ],
+    );
+  }
+
+  // 🍃 Tea Collection Cards
+  Widget _buildTeaCollectionCards() {
+    return SizedBox(
+      height: 200,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: teaCollections.length,
+        itemBuilder: (context, index) {
+          final tea = teaCollections[index];
+          return _buildTeaCard(
+              tea['collector_name'], tea['quantity'], tea['quality']);
+        },
+      ),
+    );
+  }
+
+  Widget _buildTeaCard(String collector, double quantity, String quality) {
+    return Card(
+      margin: const EdgeInsets.all(8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 5,
+      child: Container(
+        width: 180,
+        padding: const EdgeInsets.all(12),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Image
-            ClipRRect(
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(15)),
-              child: Image.asset(
-                imagePath,
-                height: 120,
-                fit: BoxFit.cover,
-              ),
-            ),
-            // Product Name
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                name,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-            // Product Price
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                '\$${price.toStringAsFixed(2)}/Kg',
-                style: TextStyle(
-                  color: Colors.green[700],
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            Image.asset('assets/images/tea.png', height: 80, fit: BoxFit.cover),
+            const SizedBox(height: 5),
+            Text(collector,
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text("Quantity: $quantity kg",
+                style: const TextStyle(fontSize: 14)),
+            Text("Quality: $quality", style: const TextStyle(fontSize: 14)),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildServiceButton(String label) {
-    return ElevatedButton(
-      onPressed: () {},
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.lightGreen[100],
-        foregroundColor: Colors.black,
+  // 📦 Supplier Cards
+  Widget _buildSupplierCards() {
+    return SizedBox(
+      height: 140,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: suppliers.length,
+        itemBuilder: (context, index) {
+          final supplier = suppliers[index];
+          return _buildSupplierCard(supplier['name'], supplier['contact']);
+        },
       ),
-      child: Text(label),
+    );
+  }
+
+  Widget _buildSupplierCard(String name, String contact) {
+    return Card(
+      margin: const EdgeInsets.all(8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 5,
+      child: Container(
+        width: 180,
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: [
+            Image.asset('assets/images/supplier.png',
+                height: 80, fit: BoxFit.cover),
+            const SizedBox(height: 5),
+            Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text("Contact: $contact", style: const TextStyle(fontSize: 14)),
+          ],
+        ),
+      ),
     );
   }
 }
