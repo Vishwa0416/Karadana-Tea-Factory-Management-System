@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:karadana_tea_factory/screens/home/homepage.dart';
+import 'package:karadana_tea_factory/screens/start/SplashScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

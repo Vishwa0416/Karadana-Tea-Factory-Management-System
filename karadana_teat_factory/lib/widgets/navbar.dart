@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import '../screens/home/homepage.dart';
 import '../screens/supplier/supplier.dart';
 import '../screens/teaCollection/tea.dart';
+import '../screens/profile/profile.dart';
 
-class CustomNavBar extends StatelessWidget {
+class CustomNavBar extends StatefulWidget {
   final int selectedIndex;
   final ValueChanged<int> onItemTapped;
 
@@ -11,33 +12,27 @@ class CustomNavBar extends StatelessWidget {
       {super.key, required this.selectedIndex, required this.onItemTapped});
 
   @override
+  _CustomNavBarState createState() => _CustomNavBarState();
+}
+
+class _CustomNavBarState extends State<CustomNavBar> {
+  @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      currentIndex: selectedIndex,
-      onTap: onItemTapped,
+      currentIndex: widget.selectedIndex,
+      onTap: widget.onItemTapped, // ✅ Corrected tap function
       items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_filled),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.emoji_nature),
-          label: 'Tea Collection',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.group_add),
-          label: 'Suppliers',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.eco), label: 'Tea'),
+        BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Suppliers'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
       ],
-      selectedItemColor: Colors.teal[700],
-      unselectedItemColor: Colors.grey[600],
-      backgroundColor: Colors.lightGreen[50],
-      showUnselectedLabels: false,
+      selectedItemColor: Colors.green,
+      unselectedItemColor: Colors.grey,
+      backgroundColor: Colors.white,
+      showUnselectedLabels: true,
       type: BottomNavigationBarType.fixed,
       elevation: 8,
-      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
-      iconSize: 24,
     );
   }
 }
